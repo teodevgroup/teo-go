@@ -25,14 +25,6 @@ func NewApp() *AppBuilder {
 	}
 }
 
-func (appBuilder AppBuilder) Load(schema_file_name string) {
-	if len(schema_file_name) == 0 {
-		C.AppBuilder_Load(&appBuilder.cAppBuilder, nil)
-	} else {
-		C.AppBuilder_Load(&appBuilder.cAppBuilder, C.CString(schema_file_name))
-	}
-}
-
 func (appBuilder AppBuilder) Run() {
 	var wg sync.WaitGroup
 	wg.Add(1)
@@ -42,6 +34,5 @@ func (appBuilder AppBuilder) Run() {
 
 func main() {
 	app := NewApp()
-	app.Load("./schema.teo")
 	app.Run()
 }
